@@ -1,0 +1,23 @@
+{
+  "name": "tp-nodejs-api-testing",
+  "version": "1.0.0",
+  "description": "TP - Apprendre à créer une API REST avec Express et écrire des tests unitaires avec Jest",
+  "license": "MIT",
+  "author": "Étudiants 3ème année",
+  "type": "commonjs",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "jest --verbose",
+    "test:watch": "jest --watch --verbose",
+    "test:coverage": "jest --coverage --verbose"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "supertest": "^7.2.2"
+  }
+}
