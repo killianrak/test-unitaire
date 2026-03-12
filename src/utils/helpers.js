@@ -49,7 +49,12 @@
 //     Math.max(...[1, 3, 5]) revient à écrire Math.max(1, 3, 5)
 // ────────────────────────────────────────────────────────────
 const generateNextId = (items) => {
-  // ✅ À COMPLÉTER ICI
+
+  if (items.length === 0) return 1;
+
+  const ids = items.map(item => item.id);
+
+  return Math.max(...ids) + 1;
 
   // Étape 1 : Si le tableau est vide, retourner 1
   // if (items.length === 0) return 1;
@@ -89,9 +94,9 @@ const generateNextId = (items) => {
 //   Le "===" c'est la comparaison stricte (est-ce que c'est EXACTEMENT pareil ?)
 // ────────────────────────────────────────────────────────────
 const filterByCategory = (products, category) => {
-  // ✅ À COMPLÉTER ICI — une seule ligne suffit !
 
-  // return products.filter(product => product.category === category);
+  return products.filter(product => product.category === category);
+
 };
 
 // ────────────────────────────────────────────────────────────
@@ -137,29 +142,20 @@ const filterByCategory = (products, category) => {
 //     "   ".trim() → "" (chaîne vide)
 // ────────────────────────────────────────────────────────────
 const validateProduct = (product) => {
-  // On crée un tableau vide pour collecter les erreurs
   const errors = [];
 
-  // ✅ À COMPLÉTER ICI
+  if (!product.name || product.name.trim() === "") {
+    errors.push("Le nom est requis");
+  }
 
-  // Vérification du nom :
-  // if (!product.name || product.name.trim() === "") {
-  //   errors.push("Le nom est requis");
-  // }
+  if (product.price === undefined || typeof product.price !== "number" || product.price <= 0) {
+    errors.push("Le prix doit être un nombre positif");
+  }
 
-  // Vérification du prix :
-  // if (product.price === undefined || typeof product.price !== "number" || product.price <= 0) {
-  //   errors.push("Le prix doit être un nombre positif");
-  // }
+  if (!product.category || product.category.trim() === "") {
+     errors.push("La catégorie est requise");
+   }
 
-  // Vérification de la catégorie :
-  // if (!product.category || product.category.trim() === "") {
-  //   errors.push("La catégorie est requise");
-  // }
-
-  // On retourne le résultat :
-  // - valid = true si le tableau d'erreurs est vide (length === 0)
-  // - valid = false s'il y a au moins une erreur
   return {
     valid: errors.length === 0,
     errors,
@@ -192,9 +188,9 @@ const validateProduct = (product) => {
 //     "29,90" + " €" → "29,90 €"
 // ────────────────────────────────────────────────────────────
 const formatPrice = (price) => {
-  // ✅ À COMPLÉTER ICI — une seule ligne suffit !
 
-  // return price.toFixed(2).replace(".", ",") + " €";
+  return price.toFixed(2).replace(".", ",") + " €";
+
 };
 
 // ────────────────────────────────────────────────────────────

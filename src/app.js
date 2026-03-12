@@ -50,8 +50,7 @@ const app = express();
 // Documentation : https://expressjs.com/fr/4x/api.html#express.json
 // ────────────────────────────────────────────────────────────
 
-// TODO ÉTUDIANT : Décommenter la ligne suivante (enlever les //)
-// app.use(express.json());
+ app.use(express.json());
 
 // ────────────────────────────────────────────────────────────
 // ÉTAPE 2 : Brancher les routes des produits
@@ -73,9 +72,8 @@ const app = express();
 // Documentation : https://expressjs.com/fr/4x/api.html#app.use
 // ────────────────────────────────────────────────────────────
 
-// TODO ÉTUDIANT : Décommenter les 2 lignes suivantes
-// const productRoutes = require("./routes/productRoutes");
-// app.use("/api/products", productRoutes);
+const productRoutes = require("./routes/productRoutes");
+app.use("/api/products", productRoutes);
 
 // ────────────────────────────────────────────────────────────
 // ÉTAPE 3 : Route "catch-all" pour les erreurs 404
@@ -91,10 +89,9 @@ const app = express();
 // on tombe ici.
 // ────────────────────────────────────────────────────────────
 
-// TODO ÉTUDIANT : Décommenter les 3 lignes suivantes
-// app.use((req, res) => {
-//   res.status(404).json({ message: "Route non trouvée" });
-// });
+ app.use((req, res) => {
+   res.status(404).json({ message: "Route non trouvée" });
+ });
 
 // ────────────────────────────────────────────────────────────
 // EXPORT

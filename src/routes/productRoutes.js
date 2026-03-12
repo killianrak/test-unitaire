@@ -49,19 +49,14 @@ const productController = require("../controllers/productController");
 //
 // ────────────────────────────────────────────────────────────
 
-// ✅ À COMPLÉTER ICI — Écrire les 4 routes :
 
-// Route 1 : Quand on fait GET /api/products → appeler getAllProducts
-// router.get("/", productController.getAllProducts);
+ router.get("/", productController.getAllProducts);
 
-// Route 2 : Quand on fait GET /api/products/3 → appeler getProductById
-// router.get("/:id", productController.getProductById);
+ router.get("/:id", productController.getProductById);
 
-// Route 3 : Quand on fait POST /api/products → appeler createProduct
-// router.post("/", productController.createProduct);
+ router.post("/", productController.createProduct);
 
-// Route 4 : Quand on fait DELETE /api/products/3 → appeler deleteProduct
-// router.delete("/:id", productController.deleteProduct);
+ router.delete("/:id", productController.deleteProduct);
 
 // ────────────────────────────────────────────────────────────
 // EXPORT — On rend le routeur accessible pour app.js

@@ -54,21 +54,17 @@ const { generateNextId, validateProduct } = require("../utils/helpers");
 //
 // ────────────────────────────────────────────────────────────
 const getAllProducts = (req, res) => {
-  // ✅ À COMPLÉTER ICI
-
-  // La version simple (suffisante) :
-  // res.status(200).json(products);
 
   // La version bonus (avec filtre par catégorie) :
   // Si l'URL est /api/products?category=audio
   // alors req.query.category vaut "audio"
   //
-  // const { category } = req.query;
-  // if (category) {
-  //   const filtered = products.filter(p => p.category === category);
-  //   return res.status(200).json(filtered);
-  // }
-  // res.status(200).json(products);
+  const { category } = req.query;
+   if (category) {
+     const filtered = products.filter(p => p.category === category);
+     return res.status(200).json(filtered);
+  }
+  res.status(200).json(products);
 };
 
 // ────────────────────────────────────────────────────────────
@@ -101,21 +97,16 @@ const getAllProducts = (req, res) => {
 //   parseInt("42") → transforme le texte "42" en nombre 42
 // ────────────────────────────────────────────────────────────
 const getProductById = (req, res) => {
-  // ✅ À COMPLÉTER ICI
 
-  // Étape 1 : Récupérer l'ID depuis l'URL et le convertir en nombre
-  // const id = parseInt(req.params.id);
+   const id = parseInt(req.params.id);
 
-  // Étape 2 : Chercher le produit dans le tableau
-  // const product = products.find(p => p.id === id);
+   const product = products.find(p => p.id === id);
 
-  // Étape 3 : Si le produit n'existe pas → erreur 404
-  // if (!product) {
-  //   return res.status(404).json({ message: "Produit non trouvé" });
-  // }
+   if (!product) {
+     return res.status(404).json({ message: "Produit non trouvé" });
+   }
 
-  // Étape 4 : Si le produit existe → on le renvoie
-  // res.status(200).json(product);
+  res.status(200).json(product);
 };
 
 // ────────────────────────────────────────────────────────────
@@ -150,33 +141,30 @@ const getProductById = (req, res) => {
 //     [1, 2].push(3) → le tableau devient [1, 2, 3]
 // ────────────────────────────────────────────────────────────
 const createProduct = (req, res) => {
-  // ✅ À COMPLÉTER ICI
 
-  // Étape 1 : Récupérer les données envoyées par le client
-  // const { name, price, category } = req.body;
+   const { name, price, category } = req.body;
 
-  // Étape 2 : Vérifier que les données sont valides
-  // const validation = validateProduct({ name, price, category });
-  // if (!validation.valid) {
-  //   return res.status(400).json({
-  //     message: "Données invalides",
-  //     errors: validation.errors,
-  //   });
-  // }
+   const validation = validateProduct({ name, price, category });
+   if (!validation.valid) {
+    return res.status(400).json({
+       message: "Données invalides",
+       errors: validation.errors,
+     });
+   }
 
   // Étape 3 : Créer le nouveau produit avec un ID auto-généré
-  // const newProduct = {
-  //   id: generateNextId(products),
-  //   name,          ← raccourci pour name: name
-  //   price,         ← raccourci pour price: price
-  //   category,      ← raccourci pour category: category
-  // };
+   const newProduct = {
+     id: generateNextId(products),
+     name,          
+     price,        
+     category,     
+   };
 
   // Étape 4 : Ajouter le produit au tableau (notre "fausse BDD")
-  // products.push(newProduct);
+   products.push(newProduct);
 
   // Étape 5 : Renvoyer le produit créé avec le code 201 (Créé)
-  // res.status(201).json(newProduct);
+   res.status(201).json(newProduct);
 };
 
 // ────────────────────────────────────────────────────────────
@@ -209,21 +197,21 @@ const deleteProduct = (req, res) => {
   // ✅ À COMPLÉTER ICI
 
   // Étape 1 : Récupérer l'ID et le convertir en nombre
-  // const id = parseInt(req.params.id);
+   const id = parseInt(req.params.id);
 
   // Étape 2 : Trouver la POSITION du produit dans le tableau
-  // const index = products.findIndex(p => p.id === id);
+   const index = products.findIndex(p => p.id === id);
 
   // Étape 3 : Si le produit n'existe pas (index vaut -1)
-  // if (index === -1) {
-  //   return res.status(404).json({ message: "Produit non trouvé" });
-  // }
+   if (index === -1) {
+     return res.status(404).json({ message: "Produit non trouvé" });
+   }
 
   // Étape 4 : Supprimer le produit du tableau
-  // products.splice(index, 1);
+   products.splice(index, 1);
 
   // Étape 5 : Confirmer la suppression
-  // res.status(200).json({ message: "Produit supprimé" });
+   res.status(200).json({ message: "Produit supprimé" });
 };
 
 // ────────────────────────────────────────────────────────────

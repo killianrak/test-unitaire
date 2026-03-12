@@ -37,24 +37,19 @@
  * TODO ÉTUDIANT (BONUS) : Compléter ce middleware
  */
 const validateProductMiddleware = (req, res, next) => {
-  // ✅ À COMPLÉTER ICI
-  //
-  // Étape 1 : Récupérer les données du body
-  // const { name, price, category } = req.body;
-  //
-  // Étape 2 : Collecter les erreurs
-  // const errors = [];
-  // if (!name || name.trim() === "") errors.push("Le nom est requis");
-  // if (price === undefined || typeof price !== "number" || price <= 0) errors.push("Le prix doit être un nombre positif");
-  // if (!category || category.trim() === "") errors.push("La catégorie est requise");
-  //
-  // Étape 3 : S'il y a des erreurs → bloquer la requête
-  // if (errors.length > 0) {
-  //   return res.status(400).json({ message: "Données invalides", errors });
-  // }
-  //
-  // Étape 4 : Tout est OK → passer au contrôleur
-  // next();
+  
+  const { name, price, category } = req.body;
+  
+   const errors = [];
+   if (!name || name.trim() === "") errors.push("Le nom est requis");
+   if (price === undefined || typeof price !== "number" || price <= 0) errors.push("Le prix doit être un nombre positif");
+   if (!category || category.trim() === "") errors.push("La catégorie est requise");
+  
+   if (errors.length > 0) {
+     return res.status(400).json({ message: "Données invalides", errors });
+   }
+  
+   next();
 };
 
 module.exports = validateProductMiddleware;
